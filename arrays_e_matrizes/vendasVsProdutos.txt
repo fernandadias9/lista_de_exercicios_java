@@ -1,0 +1,60 @@
+/* ESCREVA UM PROGRAMA  QUE  LEIA  UMA  MATRIZ 5X5REPRESENTANDO AS VENDAS  DE PRODUTOS EM  UMA LOJA.CADA LINHA REPRESENTA UM PRODUTOE CADA COLUNA UM DIA DA SEMANA.EM SEGUIDA,EXIBA NA TELA O TOTAL DE VENDAS DE CADA PRODUTOE O DIA DA SEMANA QUE TEVE MAIS VENDAS. */
+
+import java.util.Scanner;
+
+public class vendas_vs_produtos {
+
+	public static void main(String[] args) {
+		Scanner teclado = new Scanner(System.in);
+
+		String[] dias = { "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira" };
+		double[][] vendas = new double[5][5];
+
+		// Preenchendo a matriz (tabela)
+		for (int i = 0; i < vendas.length; i++) {
+			for (int j = 0; j < vendas[i].length; j++) {
+				System.out.print("Informe as vendas do produto " + (i + 1) + " na " + dias[j] + ": ");
+				vendas[i][j] = teclado.nextDouble();
+			}
+		}
+		System.out.println("\n------------------------\n");
+
+		// Imprimindo a matriz (tabela)
+		for (int i = 0; i < vendas.length; i++) {
+			for (int j = 0; j < vendas[i].length; j++) {
+				System.out.print(vendas[i][j] + "   ");
+			}
+			System.out.println();
+		}
+
+		System.out.println("\n------------------------\n");
+
+		// Total vendas por produto
+		for (int i = 0; i < vendas.length; i++) {
+			double totalProduto = 0;
+			for (int j = 0; j < vendas[i].length; j++) {
+				totalProduto += vendas[i][j];
+			}
+			System.out.println("Total de vendas do produto " + (i + 1) + ": " + totalProduto);
+		}
+
+		System.out.println("\n------------------------\n");
+
+		// Total vendas por produto
+		int indice = 0;
+		double diaSemanaMaisVendas = 0;
+		for (int j = 0; j < vendas[0].length; j++) {
+			double totalProduto = 0;
+			for (int i = 0; i < vendas[j].length; i++) {
+				totalProduto += vendas[i][j];
+			}
+			if (totalProduto > diaSemanaMaisVendas) {
+				diaSemanaMaisVendas = totalProduto;
+				indice = j;
+			}
+		}
+		System.out.println("O dia da semana que mais vende é: " + dias[indice]);
+		System.out.println("Total de vendas: " + diaSemanaMaisVendas);
+		teclado.close();
+	}
+}
